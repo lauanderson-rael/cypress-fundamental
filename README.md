@@ -1,60 +1,85 @@
-# Fundamentos de Cypress
+# Cypress - Fundamentos
+
+Projeto básico para aprender os fundamentos do Cypress - uma ferramenta moderna para testes end-to-end em aplicações web.
+
+## Como usar este projeto
+
+```bash
+# Clone o repositório
+git clone https://github.com/lauanderson-rael/cypress-fundamental.git
+
+# Entre na pasta do projeto
+cd cypress-fundamental
+
+# Instale as dependências
+npm install
+
+# Execute os testes
+npm run cy:open
+```
 
 ## O que é Cypress?
-Cypress é uma ferramenta de teste de front-end para aplicações web modernas.  
-Ela permite escrever, executar e depurar testes de forma simples e rápida, focando em testes end-to-end, integração e unitários.  
 
-## Principais Características
-- Execução rápida de testes em tempo real.  
-- Ambiente de testes integrado ao navegador.  
-- Suporte nativo para JavaScript e TypeScript.  
-- Ferramenta de debug integrada.  
-- Testes consistentes e confiáveis.  
+Cypress é uma ferramenta de teste que permite:
+- Escrever testes E2E de forma simples e intuitiva
+- Executar testes em tempo real no navegador
+- Debugar testes com facilidade
+- Capturar screenshots e vídeos automaticamente
 
-## Tipos de Testes Suportados
-- **Testes End-to-End (E2E):** Validam todo o fluxo da aplicação.  
-- **Testes de Integração:** Garantem que componentes funcionem bem em conjunto.  
-- **Testes Unitários:** Validam pequenas partes isoladas do código.  
+## Executar Testes
 
-## Arquitetura
-O Cypress é executado dentro do mesmo ciclo de execução da aplicação web, permitindo acesso direto ao DOM e a rede. Isso proporciona:  
-- Controle total sobre elementos da página.  
-- Interceptação de requisições e respostas HTTP.  
-- Simulação de cenários reais do usuário.  
+```bash
+# Modo interativo (recomendado para desenvolvimento)
+npm run cy:open
 
-## Vantagens
-1. **Facilidade de uso:** Instalação simples e configuração mínima.  
-2. **Feedback rápido:** Testes rodam em tempo real enquanto são escritos.  
-3. **Depuração:** Logs claros, captura de screenshots e vídeos automáticos.  
-4. **Comunidade ativa:** Grande quantidade de tutoriais e plugins disponíveis.  
+# Modo headless (para CI/CD)
+npm run cy:run
+```
 
-## Limitações
-- Focado apenas em aplicações web (não cobre apps mobile nativos).  
-- Executa apenas em navegadores baseados em Chromium e Firefox (sem suporte oficial a Safari/IE).  
-- Possui curva de aprendizado inicial para lidar com promessas e ciclos assíncronos.  
+## Exemplo de Teste
 
-## Execução dos Testes
-- **Modo Interativo:** Mostra em tempo real o que está acontecendo no navegador.  
-- **Modo Headless:** Executa testes sem abrir interface gráfica, ideal para CI/CD.  
+```javascript
+describe('Exemplo básico', () => {
+  it('deve visitar a página inicial', () => {
+    cy.visit('https://example.com')
+    cy.contains('Example Domain')
+    cy.get('h1').should('be.visible')
+  })
+})
+```
 
-## Integração com CI/CD
-Cypress pode ser integrado em pipelines de entrega contínua (CI/CD) com ferramentas como:  
-- GitHub Actions  
-- GitLab CI/CD  
-- Jenkins  
-- CircleCI  
+## CI/CD
 
-## Boas Práticas
-- Escrever testes curtos e independentes.  
-- Utilizar seletores consistentes e estáveis para elementos.  
-- Separar dados de teste em arquivos de fixtures.  
-- Garantir limpeza de estado antes de cada teste.  
+Nesse projeto os testes executam automaticamente no GitHub Actions:
+- ✅ A cada push nas branches `main` e `develop`
+- ✅ Em Pull Requests
 
-## Recursos Adicionais
-- [Documentação Oficial](https://docs.cypress.io)  
-- [Exemplos no GitHub](https://github.com/cypress-io/cypress-example-kitchensink)  
-- [Comunidade Cypress](https://www.cypress.io/community)  
+## Estrutura do Projeto
 
----
-**Resumo:**  
-Cypress é uma solução moderna e poderosa para testes automatizados em aplicações web. Ele facilita a criação de cenários reais de uso, oferece feedback rápido e possui forte integração com fluxos de desenvolvimento contínuo.
+```
+cypress/
+├── e2e/          # Testes E2E
+│   └── spec.cy.js
+├── fixtures/     # Dados de teste (JSON)
+│   └── example.json
+└── support/      # Comandos customizados
+    ├── commands.js
+    └── e2e.js
+```
+
+## Comandos Úteis do Cypress
+
+| Comando | Descrição |
+|---------|----------|
+| `cy.visit()` | Navega para uma URL |
+| `cy.get()` | Seleciona elementos |
+| `cy.click()` | Clica em elementos |
+| `cy.type()` | Digita texto |
+| `cy.should()` | Faz asserções |
+| `cy.contains()` | Encontra texto |
+
+## Recursos
+
+- [Documentação Oficial](https://docs.cypress.io)
+- [Exemplos de Testes](https://github.com/cypress-io/cypress-example-kitchensink)
+- [Best Practices](https://docs.cypress.io/guides/references/best-practices)
