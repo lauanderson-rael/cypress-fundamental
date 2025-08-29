@@ -19,7 +19,7 @@ describe('Teste de Login', () => {
 
 
 describe('Teste de Cadastro', () => {
-  it.skip('Cadastro com sucesso', () => {
+  it('Cadastro com sucesso', () => {
     cy.visit('https://front.serverest.dev/cadastrarusuarios')
     cy.get('[data-testid="nome"]').type('UsuarioTeste')
     cy.get('[data-testid="email"]').type('usuarioteste@gmail.com')
